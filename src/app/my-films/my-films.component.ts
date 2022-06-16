@@ -12,5 +12,13 @@ export class MyFilmsComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  rateMovie() {
+    console.log("rate")
+  }
+  editeMovie() {
+    console.log("edite")
+  }
+  deleteMovie() {
+    console.log("delete")
+  }
 }
