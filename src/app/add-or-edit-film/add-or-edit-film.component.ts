@@ -17,7 +17,6 @@ export class AddOrEditFilmComponent implements OnInit {
   message: boolean = false;
 
   submitForm() {
-    
     this.onSave.emit(
       {
         title: this.movieForm.controls.titleField.value,

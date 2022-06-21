@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FilmService } from '../film.service';
 
 @Component({
   selector: 'app-my-films',
@@ -8,17 +9,23 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class MyFilmsComponent implements OnInit {
 
   @Input('parentData') public movies: any;
-  constructor() { }
+
+  constructor(private FilmService:FilmService) { }
 
   ngOnInit(): void {
+    this.movies = this.FilmService.getFilms();
   }
-  rateMovie() {
-    console.log("rate")
+  rateMovie(indexOfelement: number) {
+    console.log("rating")
+    console.log(indexOfelement);
   }
-  editeMovie() {
+  editeMovie(indexOfelement: number) {
     console.log("edite")
+    console.log(indexOfelement);
   }
-  deleteMovie() {
+  deleteMovie(indexOfelement: number) {
     console.log("delete")
+    console.log(indexOfelement);
+    this.movies.splice(indexOfelement,1)
   }
 }
