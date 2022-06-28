@@ -7,6 +7,7 @@ import { AddOrEditFilmComponent } from './add-or-edit-film/add-or-edit-film.comp
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MyFilmsComponent } from './my-films/my-films.component';
+import { HttpClientModule } from  '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { MyFilmsComponent } from './my-films/my-films.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FilmService } from '../film.service';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Film } from '../@shared/models/film';
+import { FilmService } from '../@shared/services/film.service';
 
 @Component({
   selector: 'app-my-films',
@@ -8,12 +9,15 @@ import { FilmService } from '../film.service';
 })
 export class MyFilmsComponent implements OnInit {
 
-  @Input('parentData') public movies: any;
+  //@Input('parentData') public movies: any;
+  movies: Film[] = [];
 
   constructor(private FilmService:FilmService) { }
 
   ngOnInit(): void {
-    this.movies = this.FilmService.getFilms();
+     this.FilmService.getFilms().subscribe(films => {
+      this.movies = films;
+     });
   }
   rateMovie(indexOfelement: number) {
     console.log("rating")
@@ -24,8 +28,10 @@ export class MyFilmsComponent implements OnInit {
     console.log(indexOfelement);
   }
   deleteMovie(indexOfelement: number) {
-    console.log("delete")
-    console.log(indexOfelement);
-    this.movies.splice(indexOfelement,1)
+    this.FilmService.deleteFilm(indexOfelement).subscribe(res => {
+      this.movies.splice(indexOfelement,1)
+      });
+
+     
   }
 }

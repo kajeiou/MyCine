@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-
+import { FilmService } from '../@shared/services/film.service';
+import { Film } from '../@shared/models/film';
 @Component({
   selector: 'app-add-or-edit-film',
   templateUrl: './add-or-edit-film.component.html',
@@ -15,17 +16,24 @@ export class AddOrEditFilmComponent implements OnInit {
   });
   @Output() onSave: EventEmitter<any> = new EventEmitter();
   message: boolean = false;
+  constructor(private FilmService:FilmService) { }
 
   submitForm() {
-    this.onSave.emit(
-      {
-        title: this.movieForm.controls.titleField.value,
-        synopsis: this.movieForm.controls.synopsisField.value,
-        rating: this.movieForm.controls.ratingField.value
-      }
-    );
+    /*this.FilmService.addFilm( {
+      title: this.movieForm.controls.titleField.value,
+      synopsis: this.movieForm.controls.synopsisField.value,
+      rating: this.movieForm.controls.ratingField.value
+    });*/
+    var newFilm = {
+      title: this.movieForm.controls.titleField.value,
+      synopsis: this.movieForm.controls.synopsisField.value,
+      rating: this.movieForm.controls.ratingField.value
+    } as Film;
+    this.FilmService.addFilm(newFilm).subscribe( res => {
+      console.log(res);
+    });
+    window.location.reload();
     this.showMessageSuccess();
-
   }
   showMessageSuccess(){
 
@@ -37,7 +45,6 @@ export class AddOrEditFilmComponent implements OnInit {
     },4000);
 
   }
-  constructor() { }
 
   ngOnInit(): void {
   }
