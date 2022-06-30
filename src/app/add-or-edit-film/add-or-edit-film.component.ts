@@ -32,7 +32,6 @@ export class AddOrEditFilmComponent implements OnInit {
     this.FilmService.addFilm(newFilm).subscribe( res => {
       console.log(res);
     });
-    window.location.reload();
     this.showMessageSuccess();
   }
   showMessageSuccess(){

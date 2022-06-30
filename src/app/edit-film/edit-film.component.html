@@ -1,0 +1,68 @@
+<h1 mat-dialog-title> </h1>
+<div mat-dialog-content>
+ 
+    <div *ngIf="message==true as value; else elseBlock">
+        <div class="alert alert-success text-center alert-dismissible fade show" role="alert">
+        Le film a été modifié dans la base de données
+        </div>
+
+</div>
+
+<ng-template #elseBlock></ng-template>
+  <form [formGroup]="movieForm" (ngSubmit)="submitForm();movieForm.reset()">
+    <div class="row text-center">
+            <div class="col">
+                    <h3 style="color:cadetblue;">EDITION DU FILM</h3>
+            </div>
+    </div>
+    <hr>
+    <div class="row">
+            <div class="col ">
+                    <label for="titleField">Titre</label>
+                    <div *ngIf="movieForm.controls.titleField.errors?.['required']">
+                            <span class="badge badge-danger">Titre obligatoire</span>
+                    </div>
+            </div>
+            <div class="col-8">
+                    <input class="form-control" name="titleField" type="text" formControlName="titleField">
+                    
+            </div>
+
+    </div>
+    <br>
+    <div class="row">
+            <div class="col ">
+                    <label for="synopsisField">Synopsis</label>
+            </div>
+            <div class="col-8">
+                    <input class="form-control" name="synopsisField" type="text" formControlName="synopsisField">
+            </div>
+    </div>
+    <br>
+    <div class="row">
+            <div class="col ">
+                    <label for="ratingField">Note</label>
+                    <div *ngIf="movieForm.controls.synopsisField.errors?.['maxLength']">
+                            <span class="badge badge-danger">La note est incorrecte</span>
+                    </div>
+            </div>
+            <div class="col-8">
+                    <select class="form-control" id="ratingField" formControlName="ratingField">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                    </select>
+                    
+            </div>
+    </div>     
+    <br>
+    <div class="row">
+            <div class="col font-weight-bold">
+                    <button class="btn btn-block btn-success" type="submit" [disabled]="!movieForm.valid">Sauvegarder</button>
+            </div>
+    </div>
+
+</form>
+</div>

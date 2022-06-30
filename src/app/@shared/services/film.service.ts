@@ -23,12 +23,19 @@ export class FilmService {
     return this.http.get<Film[]>(this.url + "/films");
   }
 
+  getFilm(indexOfElement:number):Observable<any> {
+    return this.http.get<Film>(this.url + "/film/"+indexOfElement)
+  }
+
   addFilm(newFilm:Film):Observable<any> {
     //this.films.push({title: newFilm.title, synopsis: newFilm.synopsis, rating: newFilm.rating });
     
    return this.http.post(this.url + "/film",newFilm);
     console.log(newFilm);
 
+  }
+  editeFilm(Film:Film) {
+    return this.http.put(this.url + "/film/" + Film.id, Film)
   }
   deleteFilm(indexOfElement: number):Observable<any> {
     console.log("Deleting movie " + indexOfElement)
